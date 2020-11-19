@@ -11,4 +11,20 @@ public class AllEvaluations {
         evaluationCount = 0;
     }
 
+    // getters
+    public Evaluation[] getEvaluationsList(){
+        Evaluation[] list = new Evaluation[evaluationCount];
+        for(int i = 0; i < evaluationCount; i++){
+            list[i] = evaluations[i];
+        }
+        return list;
+    }
+
+    public void add(Evaluation e){
+        if(evaluationCount < MAX_EVALUATIONS){
+            evaluations[evaluationCount] = e;
+            evaluationCount++;
+        }
+    }
+
 }
