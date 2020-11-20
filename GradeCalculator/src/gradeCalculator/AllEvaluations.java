@@ -41,4 +41,15 @@ public class AllEvaluations {
 
     public void setSelectedEvaluation(int i){selectedEvaluation = i;}
 
+    public double getCurrentGrade(){
+        double sum = 0;
+
+        for(int i = 0; i < evaluationCount; i++){
+            // divides grade by 100 and multiply by weight for each evaluation
+            sum += ((evaluations[i].getGrade()/100) * evaluations[i].getWeight());
+        }
+        return sum;
+    }
+
+
 }

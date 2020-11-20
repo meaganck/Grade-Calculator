@@ -65,6 +65,14 @@ public class GradeCalculatorApp extends Application{
             }
         });
 
+        view.getCalcButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                CalculateDialog calculateDialog = new CalculateDialog(primaryStage, model);
+                calculateDialog.showAndWait();
+            }
+        });
+
         primaryStage.setTitle("Grade Calculator");
         primaryStage.setScene(new Scene(view, 650, 300));
         primaryStage.show();

@@ -21,8 +21,11 @@ public class GradeCalculatorView extends GridPane {
     private ListView<Double> wList;
     private Button addButton;
     private Button removeButton;
+    private Button calcButton;
 
     public GradeCalculatorView(AllEvaluations model){
+
+        setStyle("-fx-font: 16 arial;  -fx-font-weight:bold;");
 
         // components
         Label evaluationLabel = new Label("Evaluations");
@@ -38,7 +41,7 @@ public class GradeCalculatorView extends GridPane {
         HBox buttonPane = new HBox();
         addButton = new Button("Add");
         removeButton = new Button("Remove");
-        Button calcButton = new Button("Calculate");
+        calcButton = new Button("Calculate");
         buttonPane.getChildren().add(addButton);
         buttonPane.getChildren().add(removeButton);
         buttonPane.getChildren().add(calcButton);
@@ -127,6 +130,7 @@ public class GradeCalculatorView extends GridPane {
     //  getters
     public Button getAddButton(){return addButton;}
     public Button getRemoveButton(){return removeButton;}
+    public Button getCalcButton(){return calcButton;}
     public ListView getnList(){return nList;}
 
 
