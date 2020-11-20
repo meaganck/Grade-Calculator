@@ -34,7 +34,33 @@ public class GradeCalculatorApp extends Application{
 
                 if (result.isPresent()){
                     model.add(e);
-                    view.update(model);
+                    view.update(model, -1);
+                }
+            }
+        });
+
+        view.getRemoveButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (view.getnList().getSelectionModel().getSelectedItem() != null) {
+
+                    // makes an alert to make sure user wants to delete item
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Please Confirm");
+                    alert.setHeaderText("Please Confirm");
+                    alert.setContentText("Are you sure that you want to remove this evaluation?");
+
+                    Optional result = alert.showAndWait();
+
+                    // once the alert is closed
+                    if (result.isPresent()){
+                        // checks if the ok button was clicked
+                        if(result.get() == ButtonType.OK){
+                            // since they verified that they wanted to remove the evaluation, removes it from model
+                            model.remove((String)view.getnList().getSelectionModel().getSelectedItem());
+                            view.update(model, -1);
+                        }
+                    }
                 }
             }
         });

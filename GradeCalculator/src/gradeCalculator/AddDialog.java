@@ -12,6 +12,7 @@ import javafx.util.Callback;
 public class AddDialog extends Dialog {
     public AddDialog(Stage owner, Evaluation e){
         setTitle("Add Evaluation");
+        setHeaderText("Please add an evaluation");
 
         ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
@@ -50,6 +51,59 @@ public class AddDialog extends Dialog {
         getDialogPane().setPrefSize(400, 150);
 
         Node okButton = getDialogPane().lookupButton(okButtonType);
+        okButton.setDisable(true);
+
+        nField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(!nField.getText().trim().isEmpty()){
+                    try {
+                        // tries to convert input from grade and weight TextField to double
+                        Double grade = Double.parseDouble(gField.getText().trim());
+                        Double weight = Double.parseDouble(wField.getText().trim());
+                        okButton.setDisable(false); // since valid input, ok button can be enabled
+
+                    } catch (final NumberFormatException e) {
+                        okButton.setDisable(true); // did not enter a valid int
+                    }
+                }
+            }
+        });
+
+        gField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // checks if something is written in name field
+                if(!nField.getText().trim().isEmpty()){
+                    try {
+                        // tries to convert input from grade and weight TextField to double
+                        Double grade = Double.parseDouble(gField.getText().trim());
+                        Double weight = Double.parseDouble(wField.getText().trim());
+                        okButton.setDisable(false); // since valid input, ok button can be enabled
+
+                    } catch (final NumberFormatException e) {
+                        okButton.setDisable(true); // did not enter a valid int
+                    }
+                }
+            }
+        });
+
+        wField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(!nField.getText().trim().isEmpty()){
+                    try {
+                        // tries to convert input from grade and weight TextField to double
+                        Double grade = Double.parseDouble(gField.getText().trim());
+                        Double weight = Double.parseDouble(wField.getText().trim());
+                        okButton.setDisable(false); // since valid input, ok button can be enabled
+
+                    } catch (final NumberFormatException e) {
+                        okButton.setDisable(true); // did not enter a valid int
+                    }
+                }
+            }
+        });
 
         setResultConverter(new Callback<ButtonType, Evaluation>()  {
             @Override
@@ -71,6 +125,7 @@ public class AddDialog extends Dialog {
                 return null;
             }
         });
+
 
 
 

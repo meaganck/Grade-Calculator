@@ -1,7 +1,9 @@
 package gradeCalculator;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Node;
 import javafx.collections.FXCollections;
@@ -18,6 +20,7 @@ public class GradeCalculatorView extends GridPane {
     private ListView<Double> gList;
     private ListView<Double> wList;
     private Button addButton;
+    private Button removeButton;
 
     public GradeCalculatorView(AllEvaluations model){
 
@@ -31,22 +34,23 @@ public class GradeCalculatorView extends GridPane {
         gList = new ListView<Double>();
         wList = new ListView<Double>();
 
+        // button pane in HBox
         HBox buttonPane = new HBox();
         addButton = new Button("Add");
-        Button removeButton = new Button("Remove");
+        removeButton = new Button("Remove");
         Button calcButton = new Button("Calculate");
         buttonPane.getChildren().add(addButton);
         buttonPane.getChildren().add(removeButton);
         buttonPane.getChildren().add(calcButton);
 
-        // styling
+        // styling button pane
         buttonPane.setSpacing(10);
         addButton.setStyle("-fx-font: 14 arial; -fx-base: rgb(0,100,0); -fx-text-fill: rgb(255,255,255);");
         removeButton.setStyle("-fx-font: 14 arial; -fx-base: rgb(200,0,0); -fx-text-fill: rgb(255,255,255);");
         calcButton.setStyle("-fx-font: 14 arial;");
 
 
-        // adding components
+        // adding components to grid pane
         add(evaluationLabel, 0, 0);
         add(nList, 0, 1);
         add(gradeLabel, 1, 0);
@@ -60,10 +64,39 @@ public class GradeCalculatorView extends GridPane {
         setHgap(10);
         setVgap(10);
 
+
+        // event handlers
+
+        // these handlers check which item in ListView is selected
+        // so the whole row can be selected when it updates the view
+        nList.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                model.setSelectedEvaluation(nList.getSelectionModel().getSelectedIndex());
+                update(model, nList.getSelectionModel().getSelectedIndex());
+            }
+        });
+
+        gList.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                model.setSelectedEvaluation(gList.getSelectionModel().getSelectedIndex());
+                update(model, gList.getSelectionModel().getSelectedIndex());
+            }
+        });
+
+        wList.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                model.setSelectedEvaluation(wList.getSelectionModel().getSelectedIndex());
+                update(model, wList.getSelectionModel().getSelectedIndex());
+            }
+        });
+
     }
 
 
-    public void update(AllEvaluations model){
+    public void update(AllEvaluations model, int selectedIndex){
 
         Evaluation[] list = model.getEvaluationsList();
 
@@ -83,11 +116,18 @@ public class GradeCalculatorView extends GridPane {
         wList.setItems(FXCollections.observableArrayList(weights));
 
 
+        //updates selected items in ListView
+        nList.getSelectionModel().select(selectedIndex);
+        gList.getSelectionModel().select(selectedIndex);
+        wList.getSelectionModel().select(selectedIndex);
+
+
     }
 
     //  getters
     public Button getAddButton(){return addButton;}
-
+    public Button getRemoveButton(){return removeButton;}
+    public ListView getnList(){return nList;}
 
 
 }
