@@ -41,6 +41,16 @@ public class AllEvaluations {
 
     public void setSelectedEvaluation(int i){selectedEvaluation = i;}
 
+    public double getTotalWeight(){
+        double sum = 0;
+
+        for(int i = 0; i < evaluationCount; i++){
+            // divides grade by 100 and multiply by weight for each evaluation
+            sum += (evaluations[i].getWeight());
+        }
+        return sum;
+    }
+
     public double getCurrentGrade(){
         double sum = 0;
 
@@ -48,8 +58,14 @@ public class AllEvaluations {
             // divides grade by 100 and multiply by weight for each evaluation
             sum += ((evaluations[i].getGrade()/100) * evaluations[i].getWeight());
         }
-        return sum;
+        return (sum/getTotalWeight())*100;
     }
+
+    public double getGoal(double goal){
+        double finalWeight = (100 - getTotalWeight())/100;
+        return (double)((goal - (getCurrentGrade() * (1 -finalWeight)))/finalWeight);
+    }
+
 
 
 }
