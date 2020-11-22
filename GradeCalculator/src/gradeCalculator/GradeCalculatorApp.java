@@ -1,16 +1,10 @@
 package gradeCalculator;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -28,6 +22,9 @@ public class GradeCalculatorApp extends Application{
         view.getAddButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
+                // pop up dialog to get new evaluation, if the user decides to add it,
+                // adds to model and updates view
                 Evaluation e = new Evaluation();
                 AddDialog addDialog = new AddDialog(primaryStage, e);
                 Optional<Evaluation> result = addDialog.showAndWait();
@@ -42,6 +39,7 @@ public class GradeCalculatorApp extends Application{
         view.getRemoveButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                // deletes selected evaluation and pops up a confirmation alert to make sure they want to delete it
                 if (view.getnList().getSelectionModel().getSelectedItem() != null) {
 
                     // makes an alert to make sure user wants to delete item
@@ -68,6 +66,7 @@ public class GradeCalculatorApp extends Application{
         view.getCalcButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                // shows calculate dialog
                 CalculateDialog calculateDialog = new CalculateDialog(primaryStage, model);
                 calculateDialog.showAndWait();
             }
@@ -77,6 +76,16 @@ public class GradeCalculatorApp extends Application{
         primaryStage.setScene(new Scene(view, 650, 300));
         primaryStage.show();
 
+        // Bind the ListView scroll property
+        ScrollBar bar1 = (ScrollBar)view.getnList().lookup(".scroll-bar");
+        ScrollBar bar2 = (ScrollBar)view.getgList().lookup(".scroll-bar");
+        ScrollBar bar3 = (ScrollBar)view.getwList().lookup(".scroll-bar");
+        bar1.valueProperty().bindBidirectional(bar2.valueProperty());
+        bar2.valueProperty().bindBidirectional(bar3.valueProperty());
+
+        // sometimes gets this error from scroll bar
+        // sun.javafx.scene.control.skin.VirtualFlow addTrailingCells
+        //INFO: index exceeds maxCellCount. Check size calculations for class com.sun.javafx.scene.control.skin.ListViewSkin$2
 
     }
 

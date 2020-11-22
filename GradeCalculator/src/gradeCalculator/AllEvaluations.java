@@ -22,23 +22,6 @@ public class AllEvaluations {
         return list;
     }
 
-    public void add(Evaluation e){
-        if(evaluationCount < MAX_EVALUATIONS){
-            evaluations[evaluationCount] = e;
-            evaluationCount++;
-        }
-    }
-
-    public void remove(String name){
-        for (int i = 0; i < evaluationCount; i++) {
-            Evaluation e = evaluations[i];
-            if (evaluations[i].getName().equals(name)) {
-                evaluations[i] = evaluations[evaluationCount-1];
-                evaluationCount--;
-            }
-        }
-    }
-
     public void setSelectedEvaluation(int i){selectedEvaluation = i;}
 
     public double getTotalWeight(){
@@ -64,6 +47,25 @@ public class AllEvaluations {
     public double getGoal(double goal){
         double finalWeight = (100 - getTotalWeight())/100;
         return (double)((goal - (getCurrentGrade() * (1 -finalWeight)))/finalWeight);
+    }
+
+
+    // methods
+    public void add(Evaluation e){
+        if(evaluationCount < MAX_EVALUATIONS){
+            evaluations[evaluationCount] = e;
+            evaluationCount++;
+        }
+    }
+
+    public void remove(String name){
+        for (int i = 0; i < evaluationCount; i++) {
+            Evaluation e = evaluations[i];
+            if (evaluations[i].getName().equals(name)) {
+                evaluations[i] = evaluations[evaluationCount-1];
+                evaluationCount--;
+            }
+        }
     }
 
 

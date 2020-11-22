@@ -1,16 +1,11 @@
 package gradeCalculator;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.Node;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -25,7 +20,7 @@ public class GradeCalculatorView extends GridPane {
 
     public GradeCalculatorView(AllEvaluations model){
 
-        setStyle("-fx-font: 16 arial;  -fx-font-weight:bold;");
+        setStyle("-fx-font: 16 arial;  -fx-font-weight:bold; -fx-background-color: #92a8d1;");
 
         // components
         Label evaluationLabel = new Label("Evaluations");
@@ -62,15 +57,30 @@ public class GradeCalculatorView extends GridPane {
         add(wList, 2, 1);
         add(buttonPane, 0, 2, 2,1);
 
+
+        // makes ListViews resizeable
+        final int PREF_WIDTH = 500;
+        final int PREF_HEIGHT = Integer.MAX_VALUE;
+        final int MIN_WIDTH = 50;
+        final int MIN_HEIGHT = 100;
+
+
+        nList.setPrefSize(PREF_WIDTH, PREF_HEIGHT);
+        gList.setPrefSize(PREF_WIDTH, PREF_HEIGHT);
+        wList.setPrefSize(PREF_WIDTH, PREF_HEIGHT);
+
+        nList.setMinSize(MIN_WIDTH, MIN_HEIGHT);
+        gList.setMinSize(MIN_WIDTH, MIN_HEIGHT);
+        wList.setMinSize(MIN_WIDTH, MIN_HEIGHT);
+
         // for making it look better
         setPadding(new Insets(20));
         setHgap(10);
         setVgap(10);
 
 
-        // event handlers
 
-        // these handlers check which item in ListView is selected
+        // these event handlers check which item in ListView is selected
         // so the whole row can be selected when it updates the view
         nList.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -132,6 +142,8 @@ public class GradeCalculatorView extends GridPane {
     public Button getRemoveButton(){return removeButton;}
     public Button getCalcButton(){return calcButton;}
     public ListView getnList(){return nList;}
+    public ListView getgList(){return gList;}
+    public ListView getwList(){return wList;}
 
 
 }

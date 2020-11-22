@@ -4,20 +4,16 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+
 
 public class CalculateDialog extends Dialog {
     public CalculateDialog(Stage owner, AllEvaluations e){
 
-
         setTitle("Results");
-        setHeaderText("Results");
-
+        getDialogPane().setStyle("-fx-background-color: #92a8d1;");
 
         // add another button to set goal!
         ButtonType okButtonType = new ButtonType("Done", ButtonBar.ButtonData.OK_DONE);
@@ -55,6 +51,7 @@ public class CalculateDialog extends Dialog {
         goalButton.setDisable(true); // default
 
 
+        // adds components to grid pane
         grid.add(currentLabel, 0, 0);
         grid.add(cField, 1, 0);
         grid.add(goalLabel, 0, 1);
@@ -64,8 +61,9 @@ public class CalculateDialog extends Dialog {
         grid.add(eField, 1, 3);
         grid.add(message, 1, 4);
 
-        getDialogPane().setContent(grid);
+        getDialogPane().setContent(grid); // adds grid pane to dialog
 
+        // listens to TextField to see if user enters a valid double
         gField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

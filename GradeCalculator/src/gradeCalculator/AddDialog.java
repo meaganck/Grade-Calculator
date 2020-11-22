@@ -13,6 +13,7 @@ public class AddDialog extends Dialog {
     public AddDialog(Stage owner, Evaluation e){
         setTitle("Add Evaluation");
         setHeaderText("Please add an evaluation");
+        getDialogPane().setStyle("-fx-font: 12 arial;");
 
         ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
