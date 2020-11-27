@@ -9,6 +9,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+import java.util.ArrayList;
+
 public class GradeCalculatorView extends GridPane {
     private AllEvaluations model;
     private ListView<String> nList;
@@ -111,18 +113,20 @@ public class GradeCalculatorView extends GridPane {
 
     public void update(AllEvaluations model, int selectedIndex){
 
-        Evaluation[] list = model.getEvaluationsList();
+        int size = model.getEvaluationsList().size();
 
         // lists to go in ListViews
-        String[] names = new String[list.length];
-        Double[] grades = new Double[list.length];
-        Double[] weights = new Double[list.length];
+        String[] names = new String[size];
+        Double[] grades = new Double[size];
+        Double[] weights = new Double[size];
 
-        for(int i = 0; i < list.length; i++){
-            names[i] = list[i].getName();
-            grades[i] = list[i].getGrade();
-            weights[i] = list[i].getWeight();
+        // change this later to make it shorter
+        for(int i = 0; i < size; i++){
+            names[i] = model.getEvaluationsList().get(i).getName();
+            grades[i] = model.getEvaluationsList().get(i).getGrade();
+            weights[i] = model.getEvaluationsList().get(i).getWeight();
         }
+
 
         nList.setItems(FXCollections.observableArrayList(names));
         gList.setItems(FXCollections.observableArrayList(grades));
