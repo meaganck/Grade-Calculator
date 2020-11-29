@@ -49,15 +49,30 @@ public class GradeCalculatorView extends GridPane {
         removeButton.setStyle("-fx-font: 14 arial; -fx-base: rgb(200,0,0); -fx-text-fill: rgb(255,255,255);");
         calcButton.setStyle("-fx-font: 14 arial;");
 
+        // add a menu
+        Menu sortMenu = new Menu("_Sort");
+        RadioMenuItem nameItem = new RadioMenuItem("By name");
+        RadioMenuItem gradeItem = new RadioMenuItem("By grade");
+        RadioMenuItem weightItem = new RadioMenuItem("By weight");
+        ToggleGroup sortGroup = new ToggleGroup();
+        nameItem.setToggleGroup(sortGroup);
+        gradeItem.setToggleGroup(sortGroup);
+        weightItem.setToggleGroup(sortGroup);
+        sortMenu.getItems().addAll(nameItem, gradeItem, weightItem);
+
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(sortMenu);
+
 
         // adding components to grid pane
-        add(evaluationLabel, 0, 0);
-        add(nList, 0, 1);
-        add(gradeLabel, 1, 0);
-        add(gList, 1, 1);
-        add(weightLabel, 2, 0);
-        add(wList, 2, 1);
-        add(buttonPane, 0, 2, 2,1);
+        add(menuBar, 0, 0, 3, 1);
+        add(evaluationLabel, 0, 1);
+        add(nList, 0, 2);
+        add(gradeLabel, 1, 1);
+        add(gList, 1, 2);
+        add(weightLabel, 2, 1);
+        add(wList, 2, 2);
+        add(buttonPane, 0, 3, 2,1);
 
 
         // makes ListViews resizeable
@@ -76,10 +91,18 @@ public class GradeCalculatorView extends GridPane {
         wList.setMinSize(MIN_WIDTH, MIN_HEIGHT);
 
         // for making it look better
-        setPadding(new Insets(20));
-        setHgap(10);
-        setVgap(10);
+        //setPadding(new Insets(0, 0, 20 ,0));
+        Insets insetsL = new Insets(0, 0, 0, 20);
+        Insets insetsR = new Insets(0, 20, 0, 0);
 
+        GridPane.setMargin(evaluationLabel,insetsL);
+        GridPane.setMargin(nList,insetsL);
+        GridPane.setMargin(buttonPane, new Insets(0, 0, 20, 20));
+        GridPane.setMargin(weightLabel,insetsR);
+        GridPane.setMargin(wList, insetsR);
+
+        setHgap(20);
+        setVgap(20);
 
 
         // these event handlers check which item in ListView is selected

@@ -86,13 +86,13 @@ public class CalculateDialog extends Dialog {
                 if(grade > 100){
                     message.setText("Sorry bro");
                 }else if(grade > 90) {
-                    message.setText("Good luck");
+                    message.setText("You can do it!");
                 }else if(grade <= 0) {
                     message.setText("You can skip the exam!");
                 }else if(grade > 0 && grade < 25){
                     message.setText("You don't even have to try!");
                 }else{
-                    message.setText("You can do it!");
+                    message.setText("You got this!");
                 }
 
                 eField.setText("" + grade);
