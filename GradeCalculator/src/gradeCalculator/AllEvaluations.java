@@ -1,6 +1,7 @@
 package gradeCalculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AllEvaluations {
     private ArrayList<Evaluation> evaluations;
@@ -8,7 +9,7 @@ public class AllEvaluations {
     private double goal;
 
     public AllEvaluations(){
-        evaluations = new ArrayList<>();
+        evaluations = new ArrayList<Evaluation>();
         selectedEvaluation = -1;
     }
 
@@ -45,6 +46,7 @@ public class AllEvaluations {
     // methods
     public void add(Evaluation e){
         evaluations.add(e);
+        Collections.sort(evaluations); // sorts when new evaluation is added
     }
 
     public void remove(String name){
@@ -55,6 +57,21 @@ public class AllEvaluations {
                 i--;
             }
         }
+    }
+
+    public void sortByName(){
+        Evaluation.sortStrategy = Evaluation.SORT_BY_NAME;
+        Collections.sort(evaluations);
+    }
+
+    public void sortByGrade(){
+        Evaluation.sortStrategy = Evaluation.SORT_BY_GRADE;
+        Collections.sort(evaluations);
+    }
+
+    public void sortByWeight(){
+        Evaluation.sortStrategy = Evaluation.SORT_BY_WEIGHT;
+        Collections.sort(evaluations);
     }
 
 

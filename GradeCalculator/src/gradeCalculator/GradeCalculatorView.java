@@ -9,8 +9,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-import java.util.ArrayList;
-
 public class GradeCalculatorView extends GridPane {
     private AllEvaluations model;
     private ListView<String> nList;
@@ -19,6 +17,9 @@ public class GradeCalculatorView extends GridPane {
     private Button addButton;
     private Button removeButton;
     private Button calcButton;
+    private RadioMenuItem nameItem;
+    private RadioMenuItem weightItem;
+    private RadioMenuItem gradeItem;
 
     public GradeCalculatorView(AllEvaluations model){
 
@@ -51,9 +52,9 @@ public class GradeCalculatorView extends GridPane {
 
         // add a menu
         Menu sortMenu = new Menu("_Sort");
-        RadioMenuItem nameItem = new RadioMenuItem("By name");
-        RadioMenuItem gradeItem = new RadioMenuItem("By grade");
-        RadioMenuItem weightItem = new RadioMenuItem("By weight");
+        nameItem = new RadioMenuItem("By name");
+        gradeItem = new RadioMenuItem("By grade");
+        weightItem = new RadioMenuItem("By weight");
         ToggleGroup sortGroup = new ToggleGroup();
         nameItem.setToggleGroup(sortGroup);
         gradeItem.setToggleGroup(sortGroup);
@@ -171,6 +172,10 @@ public class GradeCalculatorView extends GridPane {
     public ListView getnList(){return nList;}
     public ListView getgList(){return gList;}
     public ListView getwList(){return wList;}
+    public RadioMenuItem getNameItem(){return nameItem;}
+    public RadioMenuItem getGradeItem(){return gradeItem;}
+    public RadioMenuItem getWeightItem(){return weightItem;}
+
 
 
 }

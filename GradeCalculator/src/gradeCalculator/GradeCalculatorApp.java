@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.util.Optional;
 
 
@@ -71,6 +70,33 @@ public class GradeCalculatorApp extends Application{
                 calculateDialog.showAndWait();
             }
         });
+
+
+        view.getNameItem().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                model.sortByName();
+                view.update(model, view.getnList().getSelectionModel().getSelectedIndex());
+            }
+        });
+
+        view.getGradeItem().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                model.sortByGrade();
+                view.update(model, view.getnList().getSelectionModel().getSelectedIndex());
+            }
+        });
+
+        view.getWeightItem().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                model.sortByWeight();
+                view.update(model, view.getnList().getSelectionModel().getSelectedIndex());
+            }
+        });
+
+
 
         primaryStage.setTitle("Grade Calculator");
         primaryStage.setScene(new Scene(view, 650, 300));
